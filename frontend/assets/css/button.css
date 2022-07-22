@@ -15,3 +15,10 @@
 .btn:hover {
     background-image: linear-gradient(to right, rgb(97, 48, 97),rgb(153, 52, 153));
 }
+
+@media (max-width: 350px) {
+    .btn {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}

@@ -36,3 +36,15 @@
     font-style:italic;
     font-size: 13px;
 }
+
+@media (max-width: 680px) {
+    .form > .form-row:last-of-type {
+        display: flex;
+        flex-direction: column;
+    }
+    .form > .form-row > div {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+}
