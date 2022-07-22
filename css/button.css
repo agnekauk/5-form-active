@@ -1,0 +1,17 @@
+.btn {
+    display: inline-block;
+    width: auto;
+    background-image: linear-gradient(to right, #1f49b4, #144cd9c0);
+    padding: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+    line-height: 20px;
+    font-size: 20px;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.btn:hover {
+    background-image: linear-gradient(to right, rgb(97, 48, 97),rgb(153, 52, 153));
+}

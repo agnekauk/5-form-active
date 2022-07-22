@@ -1,0 +1,38 @@
+.form {
+    display: inline-block;
+    width:100%;
+}
+.form > .form-row {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 30px;
+}
+.form > .form-row:last-of-type {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 0px;
+}
+.form > .form-row > label {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    font-size: 14px;
+    color:rgba(90, 90, 90, 0.699);
+}
+.form > .form-row > input {
+    display:inline-block;
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    border: none;
+    border-bottom: 2px solid lightgrey;
+}
+.form > .form-row > input:focus {
+    outline: blueviolet solid 1px;
+}    
+.form input::placeholder {
+    color: rgb(167, 167, 167);
+    font-style:italic;
+    font-size: 13px;
+}
