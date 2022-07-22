@@ -4,8 +4,10 @@ import { database } from "../config/index.js";
 
 const router = express.Router();
 
-router.post('/sign-in', (req, res) => {
-    let user = req.body.user;
+router.post('/sign-up', (req, res) => {
+    let username = req.body.username;
+    let email = req.body.email;
+    let password = req.body.password;
 
     readFile(database, 'utf8', (err, data) => {
         if (err) {
@@ -14,7 +16,7 @@ router.post('/sign-in', (req, res) => {
         }
         let json = JSON.parse(data);
         let id = json.length > 0 ? json[json.length - 1].id + 1 : 0;
-        json.push({ id, user })
+        json.push({ id, username, email, password });
 
         writeFile(database, JSON.stringify(json), 'utf8', err => {
             if (err) {
