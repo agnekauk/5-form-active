@@ -102,3 +102,12 @@ body {
 .right-column a:hover {
     text-decoration: underline;
 }
+.central-text-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 650px;
+    padding: 30px;
+    gap: 20px;
+    text-align: justify;
+    background-color: #ffffff55;
+}
