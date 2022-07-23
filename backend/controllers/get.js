@@ -1,12 +1,12 @@
 import express from "express";
 import { readFile } from 'fs';
-import { database } from '../config/index.js';
+import { clientDatabase } from '../config/index.js';
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
 
-    readFile(database, 'utf8', (err, data) => {
+    readFile(clientDatabase, 'utf8', (err, data) => {
         if (err) {
             res.json({ status: 'failed', message: 'Not able to read the file' })
         } else {

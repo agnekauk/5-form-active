@@ -4,12 +4,19 @@ const getData = () => {
     transferData(url)
         .then(response => {
             if (response.status === 'success') {
-                let html = `<h1>Sveikiname prisijungus!</h1>
-                        <ul>`
+                let html = `<h1>You are inside!</h1>
+                        <ul>List of clients`
 
                 response.data.forEach(value => {
                     html += `<li data-id='${value.id}'>
-                    <div>${value.username} ${value.email}</div>
+                    <div>
+                    <span>Company:</span> <p>${value.company.name}</p>
+                    <span>Username:</span> <p>${value.name}</p>
+                    </div>
+                    <div>Contacts: 
+                    <span>User email:</span> <p> ${value.email}</p>
+                    <span>Phone:</span> <p> ${value.phone}</p>
+                    </div>
                     </li>`
                 })
 
@@ -59,7 +66,7 @@ const getData = () => {
                 //     })
                 // })
             } else {
-                messages(resp.message, resp.status);
+                messages(response.message, response.status);
             }
             // let count = response.data.length;
             // let tasksDone = 0;
