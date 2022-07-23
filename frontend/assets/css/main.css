@@ -45,7 +45,8 @@ body {
     top: 30px;
     bottom: 30px;
 }
-    .main-title {
+
+.main-title {
     display: inline-block;
     width: 100%;
     font-size: 32px;

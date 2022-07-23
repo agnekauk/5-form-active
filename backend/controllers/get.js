@@ -4,7 +4,7 @@ import { database } from '../config/index.js';
 
 const router = express.Router();
 
-router.get('/list-of-users', (req, res) => {
+router.get('/', (req, res) => {
 
     readFile(database, 'utf8', (err, data) => {
         if (err) {
