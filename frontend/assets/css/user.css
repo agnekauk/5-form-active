@@ -1,21 +1,24 @@
+.background-div {
+    display: none;
+}
+
 .container-user {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    width: 800px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    background-color: rgb(73, 76, 154);
+    background: linear-gradient(41deg,
+                rgba(73, 76, 154, 1) 0%,
+                rgb(72, 117, 201) 100%);
 }
 
-.left-column-user {
+.user-top {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 80%;
     margin-left: 10%;
-    padding: 40px;
+    padding: 40px 40px 70px 40px;
     background-color: #494eac;
     background-image: url(../img/hill.png);
     background-repeat: no-repeat;
@@ -30,16 +33,17 @@
     border-radius: 5px;
 }
 
-.right-column-user {
+.user-main {
     float: right;
     width: 80%;
-    padding: 60px;
+    padding: 30px;
     background-color: #ffffff;
     position: relative;
     margin-left: 10%;
     border: solid 2px #ffffff;
     border-top: none;
     border-radius: 5px;
+    bottom: 30px;
 }
 
 .user-main-title {
@@ -77,13 +81,22 @@
 
 li > div {
     display: flex;
-    padding: 5px 0px 5px 0px;
+    padding: 5px 0px 5px 5px;
     gap: 5px;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: darkblue;
+    flex-wrap: wrap;
 }
 
 li > div > span {
-    text-transform: capitalize;
-    font-weight: bold;
+    color: rgba(90, 90, 90, 0.699);
+}
+
+li > div > p {
+    color: rgba(90, 90, 90, 0.699);
+    text-transform: none;
+    font-weight: normal;
 }
 
 @media (max-width: 850px) {
@@ -96,4 +109,25 @@ li > div > span {
     .user-main-title {
         font-size: 24px;
     }
+    /* .container-user {
+        top: 60%;
+    } */
+}
+
+/* @media (max-width: 540px) {
+    .container-user {
+        top: 70%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-user {
+        top: 80%;
+    }
+}
+
+@media (max-width: 430px) {
+    .container-user {
+        top: 90%;
+    } */
 }
