@@ -36,4 +36,31 @@ router.get('/', (req, res) => {
 //     })
 // })
 
+// app.get('/people', function (req, res) {
+//     if (req.session.loggedIn) {
+//         let zmones = [];
+//         for (let i = 0; i < 100; i++) {
+//             zmones.push(
+//                 {
+//                     name: faker.name.firstName(),
+//                     surname: faker.name.lastName(),
+//                     address: faker.address.streetAddress() + faker.address.secondaryAddress(),
+//                     phone: faker.phone.phoneNumber(),
+//                     email: faker.internet.email(),
+//                 }
+//             )
+//         }
+//         res.render('people', { zmones, user: req.session.userName });
+//     } else {
+//         res.redirect('/login');
+//     }
+// })
+
+// // 2022-03-08 routeriai:
+// app.get('/logout', function (req, res) {
+//     req.session.loggedIn = null;
+//     req.session.userName = null;
+//     res.redirect('login');
+// })
+
 export default router;

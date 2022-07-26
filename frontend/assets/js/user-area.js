@@ -83,4 +83,4 @@ const getData = () => {
 
 window.addEventListener('load', () => {
     getData();
-})
+});

@@ -20,7 +20,7 @@ document.querySelector('#get-started').addEventListener('click', () => {
 
     if (username === '' || email === '' || password1 === '' || password2 === '') {
         messageDiv.innerHTML = 'Not all the fields are filled';
-        messageDiv.classList.add('show');
+        messageDiv.classList.add('show', 'danger');
         return
     }
 

@@ -1,8 +1,15 @@
 import express from "express";
 import { readFile, writeFile } from 'fs';
 import { database } from "../config/index.js";
+import session from 'express-session';
 
 const router = express.Router();
+
+router.use(session({
+    secret: 'authentification',
+    resave: false,
+    saveUninitialized: true,
+}));
 
 router.post('/sign-up', (req, res) => {
     let username = req.body.username;
@@ -26,6 +33,24 @@ router.post('/sign-up', (req, res) => {
             }
         })
     })
+})
+
+router.post('/login', (req, res) => {
+
+    if (Object.keys(req.body).length > 0) {
+        if (req.body.username != '' &&
+            req.body.password != '' &&
+            req.body.username === 'Agne' &&
+            req.body.password === 'tre'
+        ) {
+            req.session.loggedIn = true;
+            req.session.username = "Agne"
+            res.json({ status: 'success', message: 'You are logged in' });
+            return
+        } else {
+            res.json({ status: 'failed', message: "Username or password is not correct" });
+        }
+    }
 })
 
 export default router;
