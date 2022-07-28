@@ -1,8 +1,15 @@
 import express from "express";
 import { readFile } from 'fs';
 import { clientDatabase } from '../config/index.js';
+import session from 'express-session';
 
 const router = express.Router();
+
+router.use(session({
+    secret: 'authentification',
+    resave: false,
+    saveUninitialized: true,
+}));
 
 router.get('/', (req, res) => {
 
@@ -14,11 +21,26 @@ router.get('/', (req, res) => {
             res.json({ status: 'success', data })
         }
     })
-})
+});
+
+router.get('/:id', (req, res) => {
+
+    let id = req.params.id;
+    if (id) {
+        readFile(clientDatabase, 'utf8', (err, data) => {
+            if (err) {
+                res.json({ status: 'failed', message: 'Not able to read the file' })
+            } else {
+                data = JSON.parse(data);
+                res.json({ status: 'success', data })
+            }
+        });
+    };
+});
 
 // router.get('/:id', (req, res) => {
 //     let id = req.params.id;
-//     readFile(database, 'utf8', (err, data) => {
+//     readFile(clientDatabase, 'utf8', (err, data) => {
 //         if (err) {
 //             res.json({ status: 'failed', message: 'Not able to read the file' })
 //             return
@@ -36,31 +58,10 @@ router.get('/', (req, res) => {
 //     })
 // })
 
-// app.get('/people', function (req, res) {
-//     if (req.session.loggedIn) {
-//         let zmones = [];
-//         for (let i = 0; i < 100; i++) {
-//             zmones.push(
-//                 {
-//                     name: faker.name.firstName(),
-//                     surname: faker.name.lastName(),
-//                     address: faker.address.streetAddress() + faker.address.secondaryAddress(),
-//                     phone: faker.phone.phoneNumber(),
-//                     email: faker.internet.email(),
-//                 }
-//             )
-//         }
-//         res.render('people', { zmones, user: req.session.userName });
-//     } else {
-//         res.redirect('/login');
-//     }
-// })
-
-// // 2022-03-08 routeriai:
-// app.get('/logout', function (req, res) {
-//     req.session.loggedIn = null;
-//     req.session.userName = null;
-//     res.redirect('login');
-// })
+router.get('/logout', (req, res) => {
+    req.session.loggedIn = null;
+    req.session.username = null;
+    res.json({ status: 'success', message: 'You successfully signed out' });
+});
 
 export default router;

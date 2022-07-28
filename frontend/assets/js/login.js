@@ -18,8 +18,6 @@ document.querySelector('#login').addEventListener('click', () => {
             if (resp.status === 'success') {
                 window.location.replace("/user-area/index.html");
             }
-            // document.querySelector('#username').value = '';
-            // document.querySelector('#password').value = '';
             messages(resp.message, resp.status);
-        })
+        });
 });

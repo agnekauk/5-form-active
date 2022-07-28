@@ -79,8 +79,24 @@ const getData = () => {
             // let percentage = (tasksDone / count * 100).toFixed(0);
             // document.querySelector('.bar').style.width = percentage + '%';
         })
-}
+};
 
 window.addEventListener('load', () => {
     getData();
+});
+
+document.querySelector('.close').addEventListener('click', () => {
+
+    let route = url + '/logout';
+    let method = 'GET';
+
+    transferData(route, method)
+        .then(resp => {
+            if (resp.status === 'success') {
+                window.location.replace("/login/index.html");
+            }
+            // document.querySelector('#username').value = '';
+            // document.querySelector('#password').value = '';
+            messages(resp.message, resp.status);
+        });
 });
