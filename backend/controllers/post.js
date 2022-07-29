@@ -20,8 +20,15 @@ router.post('/sign-up', (req, res) => {
         if (err) {
             res.json({ status: 'failed', message: 'Not able to read the file' })
             return
-        }
+        };
+
         let json = JSON.parse(data);
+
+        if (json.filter(({ username }) => username === req.body.username) !== null) {
+            res.json({ status: 'failed', message: 'Such username already exists' })
+            return
+        };
+
         let id = json.length > 0 ? json[json.length - 1].id + 1 : 0;
         json.push({ id, username, email, password });
 
@@ -38,19 +45,30 @@ router.post('/sign-up', (req, res) => {
 router.post('/login', (req, res) => {
 
     if (Object.keys(req.body).length > 0) {
-        if (req.body.username != '' &&
-            req.body.password != '' &&
-            req.body.username === 'Agne' &&
-            req.body.password === 'tre'
-        ) {
-            req.session.loggedIn = true;
-            req.session.username = "Agne"
-            res.json({ status: 'success', message: 'You are logged in' });
-            return
-        } else {
-            res.json({ status: 'failed', message: "Username or password is not correct" });
-        }
-    }
+
+        if (req.body.username != '' && req.body.password != '') {
+
+            readFile(database, 'utf8', (err, data) => {
+                if (err) {
+                    res.json({ status: 'failed', message: 'Not able to read the file' })
+                    return
+                }
+                let userInQuestion = JSON.parse(data).filter(({ username }) => username === req.body.username);
+
+                let passwordInQuestion = userInQuestion[0].password;
+
+                if (req.body.password === passwordInQuestion) {
+                    req.session.loggedIn = true;
+                    req.session.username = userInQuestion.username;
+                    res.json({ status: 'success', message: 'You are logged in', id: userInQuestion[0].id });
+                    return
+                } else {
+                    res.json({ status: 'failed', message: "Username or password is not correct" });
+                };
+            });
+        };
+
+    };
 })
 
 export default router;

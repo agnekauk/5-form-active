@@ -1,4 +1,4 @@
-import { transferData, url, messages, messageDiv } from './common.js';
+import { transferData, url, messages, messageDiv, getData } from './common.js';
 
 document.querySelector('#login').addEventListener('click', () => {
     let username = document.querySelector('#username').value;
@@ -11,13 +11,16 @@ document.querySelector('#login').addEventListener('click', () => {
         messageDiv.innerHTML = 'Not all the fields are filled';
         messageDiv.classList.add('show', 'danger');
         return
-    }
+    };
 
     transferData(route, method, { username, password })
         .then(resp => {
             if (resp.status === 'success') {
-                window.location.replace("/user-area/index.html");
+                getData();
             }
             messages(resp.message, resp.status);
         });
+
+
+
 });

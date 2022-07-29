@@ -23,21 +23,6 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:id', (req, res) => {
-
-    let id = req.params.id;
-    if (id) {
-        readFile(clientDatabase, 'utf8', (err, data) => {
-            if (err) {
-                res.json({ status: 'failed', message: 'Not able to read the file' })
-            } else {
-                data = JSON.parse(data);
-                res.json({ status: 'success', data })
-            }
-        });
-    };
-});
-
 // router.get('/:id', (req, res) => {
 //     let id = req.params.id;
 //     readFile(clientDatabase, 'utf8', (err, data) => {
