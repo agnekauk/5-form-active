@@ -16,6 +16,23 @@
     background-image: linear-gradient(to right, rgb(97, 48, 97),rgb(153, 52, 153));
 }
 
+.user-btn {
+    background-image: linear-gradient(to right, #1f49b4, #144cd9c0);
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    line-height: 10px;
+    font-size: 10px;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.red-btn {
+    background-image: linear-gradient(to right, #b10a0a, #e3171bc0);    
+}
+
 @media (max-width: 350px) {
     .btn {
         padding-left: 30px;

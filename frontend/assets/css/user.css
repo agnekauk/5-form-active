@@ -74,17 +74,23 @@
 }
 .list > ul > li {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-top: 3px;
     border: solid 1px lightgray;
     font-size: 10px;
+    justify-content: space-between;
 }
 
 .list > ul > li:first-of-type {
     margin-top: 8px;
 }
 
-li > div {
+li > .client-info {
+    display: flex;
+    flex-direction: column;
+}
+
+li > .client-info > div {
     display: flex;
     padding: 5px 0px 5px 5px;
     gap: 5px;
@@ -94,19 +100,36 @@ li > div {
     flex-wrap: wrap;
 }
 
-li > div > span {
+.client-info > div > span {
     color: rgba(90, 90, 90, 0.699);
 }
 
-li > div > p {
+.client-info > div > p {
     color: rgba(90, 90, 90, 0.699);
     text-transform: none;
     font-weight: normal;
 }
 
+li > .btn-container {
+    align-self: center;
+    margin-right: 5px;
+}
+
 @media (max-width: 850px) {
     .user-container {
         width: 100vw;
+    }
+}
+
+@media (max-width: 690px) {
+    .user-container {
+        top: 65%;
+    }
+        .list > ul > li {
+        flex-direction: column;
+    }
+    .btn-container {
+        margin-bottom: 5px;
     }
 }
 
@@ -116,42 +139,47 @@ li > div > p {
     }
 }
 
-@media (max-width: 525px) {
+@media (max-width: 530px) {
     .user-container {
-        top: 55%;
+        top: 70%;
     }
-}
+} 
 
 @media (max-width: 490px) {
     .user-container {
-        top: 60%;
+        top: 75%;
     }
 }
 
 @media (max-width: 446px) {
     .user-container {
-        top: 65%;
+        top: 80%;
     }
 }
 
-@media (max-width: 405px) {
+@media (max-width: 409px) {
     .user-container {
-        top: 67%;
+        top: 83%;
     }
 }
 
-@media (max-width: 385px) {
+@media (max-width: 383px) {
     .user-container {
-        top: 70%;
+        top: 86%;
     }
 }
 @media (max-width: 375px) {
     .user-container {
-        top: 75%;
+        top: 89%;
     }
 }
-@media (max-width: 355px) {
+@media (max-width: 370px) {
     .user-container {
-        top: 81%;
+        top: 93%;
+    }
+}
+@media (max-width: 334px) {
+    .user-container {
+        top: 98%;
     }
 }

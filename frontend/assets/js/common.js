@@ -45,14 +45,20 @@ const getData = () => {
                     html += `
                     
                     <li data-id='${value.id}'>
-                    <div>
-                    <span>Company:</span> <p>${value.company.name}</p>
-                    <span>Username:</span> <p>${value.name}</p>
-                    </div>
-                    <div>Contacts: 
-                    <span>User email:</span> <p> ${value.email}</p>
-                    <span>Phone:</span> <p> ${value.phone}</p>
-                    </div>
+                        <div class="client-info">
+                            <div>
+                                <span>Company:</span> <p>${value.company.name}</p>
+                                <span>Username:</span> <p>${value.name}</p>
+                            </div>
+                            <div>Contacts: 
+                                <span>User email:</span> <p> ${value.email}</p>
+                                <span>Phone:</span> <p> ${value.phone}</p>
+                            </div>
+                        </div>
+                        <div class="btn-container">
+                            <button class="user-btn">Edit</button>
+                            <button class="user-btn red-btn">Delete</button>
+                        </div>
                     </li>`
                 })
 
@@ -101,42 +107,26 @@ const getData = () => {
                 //             })
                 //     })
                 // })
+
+                document.querySelector('.close').addEventListener('click', () => {
+
+                    let route = url + '/logout';
+                    let method = 'GET';
+
+                    transferData(route, method)
+                        .then(resp => {
+                            if (resp.status === 'success') {
+                                window.location.replace("/login/index.html");
+                            }
+                            messages(resp.message, resp.status);
+                        });
+                });
+
             } else {
                 messages(response.message, response.status);
             }
-            // let count = response.data.length;
-            // let tasksDone = 0;
-            // response.data.forEach(element => {
-            //     if (element.done === true) {
-            //         tasksDone++;
-            //     }
-            // })
-            // document.querySelector('.count').innerHTML = tasksDone + ' from ' + count + ' tasks done';
-            // let percentage = (tasksDone / count * 100).toFixed(0);
-            // document.querySelector('.bar').style.width = percentage + '%';
+
         })
 };
-
-// window.addEventListener('load', () => {
-//     getData();
-// });
-
-// document.querySelector('.close').addEventListener('click', () => {
-
-//     let route = url + '/logout';
-//     let method = 'GET';
-
-//     transferData(route, method)
-//         .then(resp => {
-//             if (resp.status === 'success') {
-//                 window.location.replace("/login/index.html");
-//             }
-//             // document.querySelector('#username').value = '';
-//             // document.querySelector('#password').value = '';
-//             messages(resp.message, resp.status);
-//         });
-// });
-
-
 
 export { url, messageDiv, messages, transferData, getData };
