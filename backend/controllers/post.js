@@ -24,7 +24,7 @@ router.post('/sign-up', (req, res) => {
 
         let json = JSON.parse(data);
 
-        if (json.filter(({ username }) => username === req.body.username) !== null) {
+        if (json.filter(({ username }) => username === req.body.username).length !== 0) {
             res.json({ status: 'failed', message: 'Such username already exists' })
             return
         };
