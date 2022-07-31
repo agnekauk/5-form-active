@@ -1,12 +1,17 @@
 import express from "express";
 import { readFile, writeFile } from 'fs';
-import { database } from '../config/index.js';
+import { clientDatabase } from '../config/index.js';
 
 const router = express.Router();
 
-router.put('/list-of-users/:id', (req, res) => {
+router.put('/edit/:id', (req, res) => {
     let id = req.params.id;
-    readFile(database, 'utf8', (err, data) => {
+    let editedCompany = req.body.company;
+    let editedName = req.body.clientName;
+    let editedEmail = req.body.clientEmail;
+    let editedPhone = req.body.phone;
+
+    readFile(clientDatabase, 'utf8', (err, data) => {
         if (err) {
             res.json({ status: 'failed', message: 'Not able to read file' })
             return
@@ -16,50 +21,22 @@ router.put('/list-of-users/:id', (req, res) => {
 
         const jsonId = json.findIndex((el) => el.id == id);
         if (jsonId === -1) {
-            res.json({ status: 'failed', message: 'Not able to find the user' });
+            res.json({ status: 'failed', message: 'Not able to find the client' });
             return
         }
 
-        json[jsonId].done = json[jsonId].done ? false : true;
+        json[jsonId].company = editedCompany;
+        json[jsonId].name = editedName;
+        json[jsonId].email = editedEmail;
+        json[jsonId].phone = editedPhone;
 
         let jsonString = JSON.stringify(json);
 
-        writeFile(database, jsonString, 'utf8', (err) => {
+        writeFile(clientDatabase, jsonString, 'utf8', (err) => {
             if (err) {
                 res.json({ status: 'failed', message: 'Not able to save the file' });
             } else {
-                res.json({ status: 'success', message: 'User information changed' });
-            }
-        })
-    })
-})
-
-router.put('/edit/:id', (req, res) => {
-    let id = req.params.id;
-    let editedTask = req.body.task;
-    readFile(database, 'utf8', (err, data) => {
-        if (err) {
-            res.json({ status: 'failed', message: 'Not able to read the file' })
-            return
-        }
-
-        const json = JSON.parse(data);
-
-        const jsonId = json.findIndex((el) => el.id == id);
-        if (jsonId === -1) {
-            res.json({ status: 'failed', message: 'Not able to find the user' });
-            return
-        }
-
-        json[jsonId].user = editedUser;
-
-        let jsonString = JSON.stringify(json);
-
-        writeFile(database, jsonString, 'utf8', (err) => {
-            if (err) {
-                res.json({ status: 'failed', message: 'Not able to get user' });
-            } else {
-                res.json({ status: 'success', message: 'User information succesfully edited' });
+                res.json({ status: 'success', message: 'Client information changed' });
             }
         })
     })

@@ -61,7 +61,7 @@ const getData = () => {
                 </div>
                 </div>
                 <div class="btn-container" data-id="${value.id}">
-                <a class="user-btn">Edit</a>
+                <a class="user-btn edit">Edit</a>
                 <a class="user-btn red-btn delete">Delete</a>
                 </div>
                 </li>`
@@ -82,21 +82,24 @@ const getData = () => {
                 //     userMessage.add('show', klase);
                 // };
 
-                // document.querySelectorAll('.fa').forEach(element => {
-                //     let id = element.parentElement.getAttribute('data-id');
+                document.querySelectorAll('.edit').forEach(element => {
+                    let id = element.parentElement.getAttribute('data-id');
 
-                //     element.addEventListener('click', () => {
-                //         transferData(url + '/' + id)
-                //             .then(resp => {
-                //                 if (resp.status === 'success') {
-                //                     document.querySelector('#new-todo').value = resp.info.task;
-                //                     addNewToDo.textContent = addNewToDo.getAttribute('data-edit-label');
-                //                     addNewToDo.setAttribute('data-mode', 'edit');
-                //                     addNewToDo.setAttribute('element-id', id);
-                //                 }
-                //             })
-                //     })
-                // })
+                    element.addEventListener('click', () => {
+                        transferData(url + '/' + id)
+                            .then(resp => {
+                                if (resp.status === 'success') {
+                                    openModal();
+                                    document.querySelector('#company').value = resp.info.company;
+                                    document.querySelector('#clientName').value = resp.info.name;
+                                    document.querySelector('#clientEmail').value = resp.info.email;
+                                    document.querySelector('#phone').value = resp.info.phone;
+                                    document.querySelector(".btn-modal-save").setAttribute('data-mode', 'edit');
+                                    document.querySelector(".modal-body").setAttribute('client-id', id);
+                                }
+                            });
+                    });
+                });
 
                 document.querySelectorAll('.delete').forEach(element => {
                     let id = element.parentElement.getAttribute('data-id');
@@ -197,14 +200,13 @@ const getData = () => {
                         let method = 'POST';
 
 
-                        // if (mode == "edit") {
+                        if (mode == "edit") {
 
-                        //     let id = addNewToDo.getAttribute('element-id');
+                            let id = document.querySelector('.modal-body').getAttribute('client-id');
 
-                        //     route = url + '/edit/' + id;
-                        //     method = 'PUT';
-
-                        // }
+                            route = url + '/edit/' + id;
+                            method = 'PUT';
+                        }
 
 
                         transferData(route, method, { company, clientName, clientEmail, phone })
@@ -219,7 +221,7 @@ const getData = () => {
                                 document.querySelector('#phone').value = '';
                                 document.querySelector(".btn-modal-save").setAttribute('data-mode', 'add');
                                 document.querySelector('.modal').classList.add("modal-hide");
-                                messagesForUser(resp.message, resp.status);
+                                // messagesForUser(resp.message, resp.status);
                             })
                     })
                 };

@@ -23,25 +23,25 @@ router.get('/', (req, res) => {
     })
 });
 
-// router.get('/:id', (req, res) => {
-//     let id = req.params.id;
-//     readFile(clientDatabase, 'utf8', (err, data) => {
-//         if (err) {
-//             res.json({ status: 'failed', message: 'Not able to read the file' })
-//             return
-//         }
+router.get('/:id', (req, res) => {
+    let id = req.params.id;
+    readFile(clientDatabase, 'utf8', (err, data) => {
+        if (err) {
+            res.json({ status: 'failed', message: 'Not able to read the file' })
+            return
+        }
 
-//         const json = JSON.parse(data);
+        const json = JSON.parse(data);
 
-//         const jsonId = json.findIndex((el) => el.id == id);
-//         if (jsonId === -1) {
-//             res.json({ status: 'failed', message: 'Not able to find the element' });
-//             return
-//         }
-//         let info = json[jsonId];
-//         res.json({ status: 'success', info });
-//     })
-// })
+        const jsonId = json.findIndex((el) => el.id == id);
+        if (jsonId === -1) {
+            res.json({ status: 'failed', message: 'Not able to find the client' });
+            return
+        }
+        let info = json[jsonId];
+        res.json({ status: 'success', info });
+    })
+})
 
 router.get('/logout', (req, res) => {
     req.session.loggedIn = null;

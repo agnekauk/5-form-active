@@ -31,35 +31,6 @@ router.delete('/delete-client/:id', (req, res) => {
             }
         })
     })
-})
-
-// router.delete('/mass-delete', (req, res) => {
-//     let ids = req.body.ids;
-
-//     readFile(database, 'utf8', (err, data) => {
-//         if (err) {
-//             res.json({ status: 'failed', message: 'Not able to read the file' })
-//             return
-//         }
-
-//         const json = JSON.parse(data);
-//         let dataArray = [];
-//         json.forEach((value, index) => {
-//             if (!ids.includes(value.id.toString())) {
-//                 dataArray.push(value);
-//             }
-//         })
-
-//         let jsonString = JSON.stringify(dataArray);
-
-//         writeFile(database, jsonString, 'utf8', (err) => {
-//             if (err) {
-//                 res.json({ status: 'failed', message: 'Not able to save the file' });
-//             } else {
-//                 res.json({ status: 'success', message: 'Users successfully deleted' });
-//             }
-//         })
-//     })
-// })
+});
 
 export default router;
