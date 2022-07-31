@@ -1,6 +1,6 @@
 import express from "express";
 import { readFile, writeFile } from 'fs';
-import { database } from "../config/index.js";
+import { clientDatabase, database } from "../config/index.js";
 import session from 'express-session';
 
 const router = express.Router();
@@ -69,6 +69,38 @@ router.post('/login', (req, res) => {
         };
 
     };
+});
+
+router.post('/add-new', (req, res) => {
+    let name = req.body.clientName;
+    let company = req.body.company;
+    let email = req.body.clientEmail;
+    let phone = req.body.phone;
+
+    readFile(clientDatabase, 'utf8', (err, data) => {
+        if (err) {
+            res.json({ status: 'failed', message: 'Not able to read the file' })
+            return
+        };
+
+        let json = JSON.parse(data);
+
+        if (json.filter(({ name }) => name === req.body.name).length !== 0) {
+            res.json({ status: 'failed', message: 'Such client already exists' })
+            return
+        };
+
+        let id = json.length > 0 ? json[json.length - 1].id + 1 : 0;
+        json.push({ id, company, name, email, phone });
+
+        writeFile(clientDatabase, JSON.stringify(json), 'utf8', err => {
+            if (err) {
+                res.json({ status: 'failed', message: 'Not able to add this client' })
+            } else {
+                res.json({ status: 'success', message: 'New client successfully saved' })
+            }
+        })
+    })
 })
 
 export default router;

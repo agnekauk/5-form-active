@@ -14,6 +14,12 @@ body {
         rgb(72, 117, 201) 100%);
     position: relative;
     height: 100vh;
+    min-height: 100vh;
+    background-image: url(../img/hill.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
 }
 .background-div {
     height: 100%;

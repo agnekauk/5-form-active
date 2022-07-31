@@ -31,13 +31,14 @@ const transferData = async (url, method = 'GET', data = []) => {
 const getData = () => {
     transferData(url)
         .then(response => {
+
             if (response.status === 'success') {
                 let html = `<div class="user-top">
             <h1 class="user-main-title">Welcome to Mountain Bay</h1>
             </div>
             <div class="user-main">
             <div class="close">x</div>
-            <div class="messages"></div>
+            <div class="user-messages messages"></div>
             <form class="list">
             <ul>
             <div class="row">
@@ -48,7 +49,7 @@ const getData = () => {
                 response.data.forEach(value => {
                     html += `
                 
-                <li data-id='${value.id}'>
+                <li>
                 <div class="client-info">
                 <div>
                 <span>Company:</span> <p>${value.company.name}</p>
@@ -59,9 +60,9 @@ const getData = () => {
                 <span>Phone:</span> <p> ${value.phone}</p>
                 </div>
                 </div>
-                <div class="btn-container">
+                <div class="btn-container" data-id="${value.id}">
                 <a class="user-btn">Edit</a>
-                <a class="user-btn red-btn">Delete</a>
+                <a class="user-btn red-btn delete">Delete</a>
                 </div>
                 </li>`
                 })
@@ -72,20 +73,15 @@ const getData = () => {
 
                 document.querySelector('.user-container').innerHTML = html;
 
-                // document.querySelectorAll('.mark-done').forEach(element => {
-                //     let id = element.parentElement.getAttribute('data-id');
-                //     element.addEventListener('click', () => {
+                // userMessage = document.querySelector('.user-messages');
 
-                //         transferData(url + '/mark-done/' + id, 'PUT')
-                //             .then(resp => {
-                //                 if (resp.status === 'success') {
-                //                     getData();
-                //                 }
-                //                 messages(resp.message, resp.status);
-                //             })
+                // const messagesForUser = (message, status) => {
+                //     let klase = (status === 'success') ? 'success' : 'danger';
+                //     userMessage.innerHTML = message;
+                //     userMessage.remove('success', 'danger');
+                //     userMessage.add('show', klase);
+                // };
 
-                //     })
-                // })
                 // document.querySelectorAll('.fa').forEach(element => {
                 //     let id = element.parentElement.getAttribute('data-id');
 
@@ -102,17 +98,20 @@ const getData = () => {
                 //     })
                 // })
 
-                // document.querySelectorAll('.delete-todo').forEach(element => {
-                //     let id = element.parentElement.getAttribute('data-id');
+                document.querySelectorAll('.delete').forEach(element => {
+                    let id = element.parentElement.getAttribute('data-id');
 
-                //     element.addEventListener('click', () => {
-                //         transferData(url + '/delete-todo/' + id, 'DELETE')
-                //             .then(resp => {
-                //                 getData();
-                //                 messages(resp.message, resp.status);
-                //             })
-                //     })
-                // })
+                    let route = url + '/delete-client/' + id;
+                    let method = 'DELETE';
+
+                    element.addEventListener('click', () => {
+                        transferData(route, method)
+                            .then(resp => {
+                                getData();
+                                messages(resp.message, resp.status);
+                            })
+                    })
+                })
 
                 document.querySelector('.close').addEventListener('click', () => {
 
@@ -137,36 +136,37 @@ const getData = () => {
                                                 <h2>Add new product</h2>
                                             </div>
                                             <div class="modal-body">
+                                                <div class="modal-messages messages"></div>
                                                 <div class="card-body">
                                                     <div class="modal-row">
                                                         <div class="form-row">
-                                                            <label class="fu gray">Company:</label>
-                                                            <input type="text" class="form-control" value=""/>
+                                                            <label>Company:</label>
+                                                            <input type="text" id="company"/>
                                                         </div>
                                                     </div>
                                                     <div class="modal-row">
                                                         <div class="form-row">
-                                                            <label class="fu gray">Client Name:</label>
-                                                            <input type="text" class="form-control" value=""/>
+                                                            <label>Client Name:</label>
+                                                            <input type="text" id="clientName"/>
                                                         </div>
                                                     </div>
                                                     <div class="modal-row">
                                                         <div class="form-row">
-                                                            <label class="fu gray">Client email:</label>
-                                                            <input type="email" class="form-control" value=""/>
+                                                            <label>Client email:</label>
+                                                            <input type="email" id="clientEmail"/>
                                                         </div>
                                                     </div>
                                                     <div class="modal-row">
                                                         <div class="form-row">
-                                                            <label class="fu gray">Phone:</label>
-                                                            <input type="phone" class="form-control"value=""/>
+                                                            <label>Phone:</label>
+                                                            <input type="phone" id="phone"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn-modal-close btn">Close</button>
-                                                <button type="button" class="btn-modal-save btn">Save</button>
+                                                <button type="button" class="btn-modal-save btn" data-mode="add">Save</button>
                                             </div>
                                         </div>
                                     </div>
@@ -174,8 +174,53 @@ const getData = () => {
 
                     document.querySelector('.place-for-modal').innerHTML = html2;
                     document.querySelector('.modal').classList.add("modal-show");
+
                     document.querySelector(".btn-modal-close").addEventListener('click', () => {
                         document.querySelector('.modal').classList.add("modal-hide");
+                    })
+
+                    document.querySelector(".btn-modal-save").addEventListener('click', () => {
+                        let company = document.querySelector('#company').value;
+                        let clientName = document.querySelector('#clientName').value;
+                        let clientEmail = document.querySelector('#clientEmail').value;
+                        let phone = document.querySelector('#phone').value;
+                        let mode = document.querySelector(".btn-modal-save").getAttribute('data-mode');
+                        let modalMessage = document.querySelector(".modal-messages");
+
+                        if (company === '' || clientName === '' || clientEmail === '' || phone === '') {
+                            modalMessage.innerHTML = 'Not all the fields are filled';
+                            modalMessage.classList.add('show', 'danger');
+                            return
+                        }
+
+                        let route = url + '/add-new';
+                        let method = 'POST';
+
+
+                        // if (mode == "edit") {
+
+                        //     let id = addNewToDo.getAttribute('element-id');
+
+                        //     route = url + '/edit/' + id;
+                        //     method = 'PUT';
+
+                        // }
+
+
+                        transferData(route, method, { company, clientName, clientEmail, phone })
+                            .then(resp => {
+                                if (resp.status === 'success') {
+                                    getData();
+
+                                }
+                                document.querySelector('#company').value = '';
+                                document.querySelector('#clientName').value = '';
+                                document.querySelector('#clientEmail').value = '';
+                                document.querySelector('#phone').value = '';
+                                document.querySelector(".btn-modal-save").setAttribute('data-mode', 'add');
+                                document.querySelector('.modal').classList.add("modal-hide");
+                                messagesForUser(resp.message, resp.status);
+                            })
                     })
                 };
 

@@ -13,25 +13,14 @@ document.querySelector('#get-started').addEventListener('click', () => {
         return
     } else { password = password1 }
 
-    let mode = document.querySelector('#get-started').getAttribute('data-mode');
-
     let route = url + '/sign-up';
     let method = 'POST';
 
     if (username === '' || email === '' || password1 === '' || password2 === '') {
-        messageDiv.innerHTML = 'Not all the fields are filled';
+        document.querySelector.innerHTML = 'Not all the fields are filled';
         messageDiv.classList.add('show', 'danger');
         return
     }
-
-    // if (mode == "edit") {
-
-    //     let id = addNewToDo.getAttribute('element-id');
-
-    //     route = url + '/edit/' + id;
-    //     method = 'PUT';
-
-    // }
 
     transferData(route, method, { username, email, password })
         .then(resp => {
@@ -42,8 +31,6 @@ document.querySelector('#get-started').addEventListener('click', () => {
             document.querySelector('#email').value = '';
             document.querySelector('#password').value = '';
             document.querySelector('#re-pass').value = '';
-            document.querySelector('#get-started').setAttribute('data-mode', 'add');
-            // addNewToDo.textContent = addNewToDo.getAttribute('data-add-label');
             messages(resp.message, resp.status);
         })
 })

@@ -1,28 +1,19 @@
-.background-div {
-    display: none;
-}
-
 .user-container {
     width: 800px;
     position: absolute;
-    top: 50%;
+    top: 20px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
     display: flex;
     flex-direction: column;
     gap: 30px;
-    background-color: rgb(73, 76, 154);
-    background: linear-gradient(41deg,
-                rgba(73, 76, 154, 1) 0%,
-                rgb(72, 117, 201) 100%);
 }
 
 .user-top {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
     padding: 40px 40px 70px 40px;
     background-color: #494eac;
     background-image: url(../img/hill.png);
@@ -40,11 +31,10 @@
 
 .user-main {
     float: right;
-    width: 80%;
+    width: 100%;
     padding: 30px;
     background-color: #ffffff;
     position: relative;
-    margin-left: 10%;
     border: solid 2px #ffffff;
     border-top: none;
     border-radius: 5px;
@@ -117,20 +107,18 @@ li > .btn-container {
 
 @media (max-width: 850px) {
     .user-container {
-        width: 100vw;
+        width: 90%;
     }
 }
 
 @media (max-width: 690px) {
-    .user-container {
-        top: 65%;
-    }
-        .list > ul > li {
+    .list > ul > li {
         flex-direction: column;
+        gap: 5px;
     }
     .btn-container {
-        margin-bottom: 5px;
-    }
+        margin: 10px 0px;
+}
 }
 
 @media (max-width: 600px) {
@@ -139,52 +127,14 @@ li > .btn-container {
     }
 }
 
-@media (max-width: 530px) {
-    .user-container {
-        top: 70%;
+@media (max-width: 346px) {
+    .row {
+        justify-content: space-between;
     }
-} 
-
-@media (max-width: 490px) {
-    .user-container {
-        top: 75%;
+    h5 {
+        width: 30%;
     }
-}
-
-@media (max-width: 458px) {
-    .user-container {
-        top: 80%;
-    }
-}
-
-@media (max-width: 422px) {
-    .user-container {
-        top: 83%;
-    }
-}
-
-@media (max-width: 400px) {
-    .user-container {
-        top: 86%;
-    }
-}
-@media (max-width: 387px) {
-    .user-container {
-        top: 89%;
-    }
-}
-@media (max-width: 378px) {
-    .user-container {
-        top: 93%;
-    }
-}
-@media (max-width: 334px) {
-    .user-container {
-        top: 98%;
-    }
-}
-@media (max-width: 322px) {
-    .user-container {
-        top: 100%;
+    .row > a {
+        line-height: 25px;
     }
 }
