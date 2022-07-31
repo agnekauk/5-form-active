@@ -4,11 +4,19 @@
     right: 0;
     bottom: 0;
     left: 0;
-    /* display: none; */
+    display: none;
     overflow: hidden;
     outline: 0;
     display: flex;
     justify-content: center;
+}
+
+.modal-show {
+    display: flex;
+}
+
+.modal-hide {
+    display: none;
 }
 
 .modal-dialog {
@@ -30,7 +38,6 @@
     background-clip: padding-box;
     border: 2px solid white;
     border-radius:5px;
-    box-shadow: 10px;
     outline: 0;
 }
 

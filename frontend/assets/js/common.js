@@ -33,39 +33,42 @@ const getData = () => {
         .then(response => {
             if (response.status === 'success') {
                 let html = `<div class="user-top">
-                                <h1 class="user-main-title">Welcome to Mountain Bay</h1>
-                            </div>
-                            <div class="user-main">
-                            <div class="close">x</div>
-                            <div class="messages"></div>
-                            <form class="list">
-                                <ul>List of clients
-                                <button class="user-btn add-new">Add new client</button>`
+            <h1 class="user-main-title">Welcome to Mountain Bay</h1>
+            </div>
+            <div class="user-main">
+            <div class="close">x</div>
+            <div class="messages"></div>
+            <form class="list">
+            <ul>
+            <div class="row">
+            <h5>List of clients</h5>
+            <a class="user-btn add-new">Add new client</a>
+            </div>`
 
                 response.data.forEach(value => {
                     html += `
-                    
-                    <li data-id='${value.id}'>
-                        <div class="client-info">
-                            <div>
-                                <span>Company:</span> <p>${value.company.name}</p>
-                                <span>Client Name:</span> <p>${value.name}</p>
-                            </div>
-                            <div>Contacts: 
-                                <span>Client email:</span> <p> ${value.email}</p>
-                                <span>Phone:</span> <p> ${value.phone}</p>
-                            </div>
-                        </div>
-                        <div class="btn-container">
-                            <button class="user-btn">Edit</button>
-                            <button class="user-btn red-btn">Delete</button>
-                        </div>
-                    </li>`
+                
+                <li data-id='${value.id}'>
+                <div class="client-info">
+                <div>
+                <span>Company:</span> <p>${value.company.name}</p>
+                <span>Client Name:</span> <p>${value.name}</p>
+                </div>
+                <div>Contacts: 
+                <span>Client email:</span> <p> ${value.email}</p>
+                <span>Phone:</span> <p> ${value.phone}</p>
+                </div>
+                </div>
+                <div class="btn-container">
+                <a class="user-btn">Edit</a>
+                <a class="user-btn red-btn">Delete</a>
+                </div>
+                </li>`
                 })
 
                 html += `</ul>
-                        </form>
-                        </div >`
+            </form>
+            </div >`
 
                 document.querySelector('.user-container').innerHTML = html;
 
@@ -162,19 +165,21 @@ const getData = () => {
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline-secondary fu up">Close</button>
-                                                <button type="button" class="btn btn-outline-primary fu up">Save</button>
+                                                <button type="button" class="btn-modal-close btn">Close</button>
+                                                <button type="button" class="btn-modal-save btn">Save</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>`
 
                     document.querySelector('.place-for-modal').innerHTML = html2;
+                    document.querySelector('.modal').classList.add("modal-show");
+                    document.querySelector(".btn-modal-close").addEventListener('click', () => {
+                        document.querySelector('.modal').classList.add("modal-hide");
+                    })
                 };
 
-                document.querySelector('.add-new').addEventListener('click', () => openModal());
-
-                openModal();
+                document.querySelector(".add-new").addEventListener('click', () => { openModal() });
 
             } else {
                 messages(response.message, response.status);
@@ -182,7 +187,5 @@ const getData = () => {
 
         })
 };
-
-
 
 export { url, messageDiv, messages, transferData, getData };
