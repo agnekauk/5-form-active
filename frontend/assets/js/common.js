@@ -39,7 +39,8 @@ const getData = () => {
                             <div class="close">x</div>
                             <div class="messages"></div>
                             <form class="list">
-                                <ul>List of clients`
+                                <ul>List of clients
+                                <button class="user-btn add-new">Add new client</button>`
 
                 response.data.forEach(value => {
                     html += `
@@ -48,10 +49,10 @@ const getData = () => {
                         <div class="client-info">
                             <div>
                                 <span>Company:</span> <p>${value.company.name}</p>
-                                <span>Username:</span> <p>${value.name}</p>
+                                <span>Client Name:</span> <p>${value.name}</p>
                             </div>
                             <div>Contacts: 
-                                <span>User email:</span> <p> ${value.email}</p>
+                                <span>Client email:</span> <p> ${value.email}</p>
                                 <span>Phone:</span> <p> ${value.phone}</p>
                             </div>
                         </div>
@@ -62,7 +63,9 @@ const getData = () => {
                     </li>`
                 })
 
-                html += '</ul></form></div >'
+                html += `</ul>
+                        </form>
+                        </div >`
 
                 document.querySelector('.user-container').innerHTML = html;
 
@@ -122,11 +125,64 @@ const getData = () => {
                         });
                 });
 
+                const openModal = () => {
+
+                    let html2 = ` <div class="modal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h2>Add new product</h2>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="card-body">
+                                                    <div class="modal-row">
+                                                        <div class="form-row">
+                                                            <label class="fu gray">Company:</label>
+                                                            <input type="text" class="form-control" value=""/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-row">
+                                                        <div class="form-row">
+                                                            <label class="fu gray">Client Name:</label>
+                                                            <input type="text" class="form-control" value=""/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-row">
+                                                        <div class="form-row">
+                                                            <label class="fu gray">Client email:</label>
+                                                            <input type="email" class="form-control" value=""/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-row">
+                                                        <div class="form-row">
+                                                            <label class="fu gray">Phone:</label>
+                                                            <input type="phone" class="form-control"value=""/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary fu up">Close</button>
+                                                <button type="button" class="btn btn-outline-primary fu up">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`
+
+                    document.querySelector('.place-for-modal').innerHTML = html2;
+                };
+
+                document.querySelector('.add-new').addEventListener('click', () => openModal());
+
+                openModal();
+
             } else {
                 messages(response.message, response.status);
             }
 
         })
 };
+
+
 
 export { url, messageDiv, messages, transferData, getData };

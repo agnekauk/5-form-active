@@ -151,29 +151,29 @@ li > .btn-container {
     }
 }
 
-@media (max-width: 446px) {
+@media (max-width: 458px) {
     .user-container {
         top: 80%;
     }
 }
 
-@media (max-width: 409px) {
+@media (max-width: 422px) {
     .user-container {
         top: 83%;
     }
 }
 
-@media (max-width: 383px) {
+@media (max-width: 400px) {
     .user-container {
         top: 86%;
     }
 }
-@media (max-width: 375px) {
+@media (max-width: 387px) {
     .user-container {
         top: 89%;
     }
 }
-@media (max-width: 370px) {
+@media (max-width: 378px) {
     .user-container {
         top: 93%;
     }
@@ -181,5 +181,10 @@ li > .btn-container {
 @media (max-width: 334px) {
     .user-container {
         top: 98%;
+    }
+}
+@media (max-width: 322px) {
+    .user-container {
+        top: 100%;
     }
 }

@@ -1,0 +1,87 @@
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* display: none; */
+    overflow: hidden;
+    outline: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-dialog {
+    position: relative;
+    width: 90%;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - (.5rem * 2));
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    pointer-events: auto;
+    background-color: white;
+    background-clip: padding-box;
+    border: 2px solid white;
+    border-radius:5px;
+    box-shadow: 10px;
+    outline: 0;
+}
+
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 40px 20px 40px 20px;
+    background-color: #494eac;
+    background-image: url(../img/hill.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: white;
+}
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 0.7rem;
+}
+.card-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    background-color: white;
+    background-clip: border-box;
+    border: 1px solid #494eac;
+    border-radius: 3px;
+    flex: 1 1 auto;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.modal-row {
+    margin-bottom: 10px;
+}
+
+.modal-row:last-of-type {
+    margin-bottom: 0px;
+}
+
+h2 {
+    font-weight: lighter;
+}
+.modal-footer {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+}
+

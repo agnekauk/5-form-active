@@ -2,17 +2,17 @@
     display: inline-block;
     width:100%;
 }
-.form > .form-row {
+.form-row {
     display: inline-block;
     width: 100%;
     margin-bottom: 30px;
 }
-.form > .form-row:last-of-type {
+.form-row:last-of-type {
     display: inline-block;
     width: 100%;
     margin-bottom: 0px;
 }
-.form > .form-row > label {
+.form-row > label {
     display: inline-block;
     width: 100%;
     margin-bottom: 14px;
@@ -20,7 +20,7 @@
     font-size: 14px;
     color:rgba(90, 90, 90, 0.699);
 }
-.form > .form-row > input {
+.form-row > input {
     display:inline-block;
     width: 100%;
     font-size: 14px;
@@ -28,21 +28,21 @@
     border: none;
     border-bottom: 2px solid lightgrey;
 }
-.form > .form-row > input:focus {
+.form-row > input:focus {
     outline: blueviolet solid 1px;
 }    
-.form input::placeholder {
+.form-row input::placeholder {
     color: rgb(167, 167, 167);
     font-style:italic;
     font-size: 13px;
 }
 
 @media (max-width: 680px) {
-    .form > .form-row:last-of-type {
+    .form-row:last-of-type {
         display: flex;
         flex-direction: column;
     }
-    .form > .form-row > div {
+    .form-row > div {
         display: flex;
         justify-content: center;
         gap: 15px;
