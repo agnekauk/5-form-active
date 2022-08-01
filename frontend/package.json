@@ -4,7 +4,7 @@
   "description": "Forma",
   "main": "index.js",
   "scripts": {
-    "dev": "dead-server --port=5000 --host=localhost",
+    "start": "dead-server --port=5000 --host=localhost",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "type": "module",

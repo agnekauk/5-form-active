@@ -37,8 +37,7 @@ const getData = () => {
             <h1 class="user-main-title">Welcome to Mountain Bay</h1>
             </div>
             <div class="user-main">
-            <div class="close">x</div>
-            <div class="user-messages messages"></div>
+            <a class="close">x</a>
             <form class="list">
             <ul>
             <div class="row">
@@ -52,7 +51,7 @@ const getData = () => {
                 <li>
                 <div class="client-info">
                 <div>
-                <span>Company:</span> <p>${value.company.name}</p>
+                <span>Company:</span> <p>${value.company}</p>
                 <span>Client Name:</span> <p>${value.name}</p>
                 </div>
                 <div>Contacts: 
@@ -72,15 +71,6 @@ const getData = () => {
             </div >`
 
                 document.querySelector('.user-container').innerHTML = html;
-
-                // userMessage = document.querySelector('.user-messages');
-
-                // const messagesForUser = (message, status) => {
-                //     let klase = (status === 'success') ? 'success' : 'danger';
-                //     userMessage.innerHTML = message;
-                //     userMessage.remove('success', 'danger');
-                //     userMessage.add('show', klase);
-                // };
 
                 document.querySelectorAll('.edit').forEach(element => {
                     let id = element.parentElement.getAttribute('data-id');
@@ -111,10 +101,11 @@ const getData = () => {
                         transferData(route, method)
                             .then(resp => {
                                 getData();
-                                messages(resp.message, resp.status);
+                                createMessagebox();
+                                messagesForUser(resp.message);
                             })
                     })
-                })
+                });
 
                 document.querySelector('.close').addEventListener('click', () => {
 
@@ -126,9 +117,23 @@ const getData = () => {
                             if (resp.status === 'success') {
                                 window.location.replace("/login/index.html");
                             }
-                            messages(resp.message, resp.status);
                         });
                 });
+
+
+                const createMessagebox = () => {
+                    let html3 = `<div class="message-box">
+                                    <div class="message-content">
+                                        <p class="user-message"></p>
+                                        <button class="user-btn" id="ok">OK</button>
+                                    </div>
+                                </div>`
+                    document.querySelector(".place-for-user-messages").innerHTML = html3;
+
+                    document.querySelector("#ok").addEventListener('click', () => {
+                        document.querySelector(".place-for-user-messages").innerHTML = "";
+                    })
+                };
 
                 const openModal = () => {
 
@@ -213,7 +218,6 @@ const getData = () => {
                             .then(resp => {
                                 if (resp.status === 'success') {
                                     getData();
-
                                 }
                                 document.querySelector('#company').value = '';
                                 document.querySelector('#clientName').value = '';
@@ -221,7 +225,8 @@ const getData = () => {
                                 document.querySelector('#phone').value = '';
                                 document.querySelector(".btn-modal-save").setAttribute('data-mode', 'add');
                                 document.querySelector('.modal').classList.add("modal-hide");
-                                // messagesForUser(resp.message, resp.status);
+                                createMessagebox();
+                                messagesForUser(resp.message);
                             })
                     })
                 };
@@ -234,5 +239,8 @@ const getData = () => {
 
         })
 };
+
+
+const messagesForUser = (message) => document.querySelector('.user-message').innerHTML = message;
 
 export { url, messageDiv, messages, transferData, getData };

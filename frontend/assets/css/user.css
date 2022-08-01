@@ -86,7 +86,7 @@ li > .client-info > div {
     gap: 5px;
     font-weight: bold;
     text-transform: capitalize;
-    color: darkblue;
+    color: #494eac;
     flex-wrap: wrap;
 }
 
@@ -104,6 +104,53 @@ li > .btn-container {
     align-self: center;
     margin-right: 5px;
 }
+
+.message-box {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    outline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.message-hide {
+    display: none;
+}
+
+.message-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 140px;
+    pointer-events: auto;
+    background-color: white;
+    background-clip: padding-box;
+    border-radius: 5px;
+    outline: 0;
+    align-items: center;
+    border: 2px solid #494eac;
+}
+
+.message-content > .user-message {
+    height: 100px;
+    color: rgba(90, 90, 90, 0.699);
+    padding-top: 30px;
+}
+
+.message-content > button {
+    width: 70px;
+    height: 30px;
+    border-radius: 15px;
+}
+
 
 @media (max-width: 850px) {
     .user-container {

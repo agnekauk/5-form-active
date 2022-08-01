@@ -23,6 +23,12 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/logout', (req, res) => {
+    req.session.loggedIn = null;
+    req.session.username = null;
+    res.json({ status: 'success', message: 'You successfully signed out' });
+});
+
 router.get('/:id', (req, res) => {
     let id = req.params.id;
     readFile(clientDatabase, 'utf8', (err, data) => {
@@ -43,10 +49,5 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.get('/logout', (req, res) => {
-    req.session.loggedIn = null;
-    req.session.username = null;
-    res.json({ status: 'success', message: 'You successfully signed out' });
-});
 
 export default router;
