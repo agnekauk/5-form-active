@@ -50,8 +50,8 @@ Backend -> index.js -> last lines of the code: app.listen(5004, () => {})
     $ npm install express $
 -   express-session:
     $ npm i express-session $
--nodemon: 
-$ npm i -D nodemon $
+-   nodemon:
+    $ npm i -D nodemon $
 
 ## Type should be declared in package.json:
 
