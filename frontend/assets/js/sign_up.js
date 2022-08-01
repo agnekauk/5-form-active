@@ -25,12 +25,8 @@ document.querySelector('#get-started').addEventListener('click', () => {
     transferData(route, method, { username, email, password })
         .then(resp => {
             if (resp.status === 'success') {
-                // getData();
+                window.location.replace("/login/index.html");
             }
-            document.querySelector('#username').value = '';
-            document.querySelector('#email').value = '';
-            document.querySelector('#password').value = '';
-            document.querySelector('#re-pass').value = '';
             messages(resp.message, resp.status);
         })
 })
