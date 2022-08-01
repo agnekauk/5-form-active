@@ -53,7 +53,7 @@ Backend -> index.js -> last lines of the code: app.listen(5004, () => {})
 -   nodemon:
     $ npm i -D nodemon $
 
-## Type should be declared in package.json:
+## Type should be set in package.json:
 
 "type": "module"
 
